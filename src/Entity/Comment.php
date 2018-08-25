@@ -30,6 +30,16 @@ class Comment
      * @ORM\Column(type="datetime")
      */
     private $create_at;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="Tricks", inversedBy="comments")
+    */
+    private $post;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="User")
+    */
+    private $user;
 
     public function getId(): ?int
     {

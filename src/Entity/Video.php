@@ -25,6 +25,11 @@ class Video
      * @ORM\Column(type="string", length=255)
      */
     private $id_platform;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="Tricks", inversedBy="videos")
+    */
+    private $post;
 
     public function getId(): ?int
     {

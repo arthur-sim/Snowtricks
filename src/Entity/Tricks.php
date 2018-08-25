@@ -30,6 +30,22 @@ class Tricks
      * @ORM\Column(type="datetime")
      */
     private $create_at;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="User")
+    * @ORM\JoinColumn(nullable = false)
+    */
+    private $user;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="Post")
+     */
+    protected $comments;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="Post")
+     */
+    protected $videos;
 
     public function getId(): ?int
     {
