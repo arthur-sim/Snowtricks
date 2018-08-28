@@ -18,6 +18,13 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $email;
+    
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $username;
@@ -39,6 +46,16 @@ class User implements UserInterface, \Serializable
         return $this->id;
     }
 
+     public function getEmail(): string
+    {
+        return $this->email;
+    }
+ 
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+    
     public function getUsername(): ?string
     {
         return $this->username;
