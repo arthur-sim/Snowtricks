@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -51,7 +53,7 @@ class User implements UserInterface, \Serializable
         return $this->id;
     }
 
-     public function getEmail(): string
+     public function getEmail(): ?string
     {
         return $this->email;
     }

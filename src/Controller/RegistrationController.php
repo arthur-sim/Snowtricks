@@ -4,6 +4,7 @@ namespace App\Controller;
  
 use App\Form\UserType;
 use App\Entity\User;
+use App\Events;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +28,7 @@ class RegistrationController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
  
-            // Par defaut l'utilisateur aura toujours le rôle ROLE_USER
+            // Par defaut l'utilisateur aura toujours le rôle ROLE_ADMIN
             $user->setRoles(['ROLE_ADMIN']);
  
             // On enregistre l'utilisateur dans la base
