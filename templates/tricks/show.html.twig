@@ -23,6 +23,15 @@
                 <th>Create_at</th>
                 <td>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+                    
+            <tr>
+                <th>Comment</th>
+                <td> 
+                    {% for comment in trick.comments %}
+                        {{ comment.content }}
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
