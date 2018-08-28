@@ -6,6 +6,7 @@ use App\Entity\Tricks;
 use App\Form\TricksType;
 use App\Repository\TricksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,6 +49,7 @@ class TricksController extends Controller
 
     /**
      * @Route("/{id}", name="tricks_show", methods="GET")
+     * @ParamConverter("tricks", class="App:Tricks", options={"repository_method" = "findByIdWithComments"})
      */
     public function show(Tricks $trick): Response
     {

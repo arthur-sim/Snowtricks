@@ -38,12 +38,12 @@ class Tricks
     private $user;
     
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="Post")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="Tricks")
      */
     protected $comments;
     
     /**
-     * @ORM\OneToMany(targetEntity="Video", mappedBy="Post")
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="Tricks")
      */
     protected $videos;
 
@@ -86,5 +86,10 @@ class Tricks
         $this->create_at = $create_at;
 
         return $this;
+    }
+    
+    public function getComments()
+    {
+            return $this->comments;
     }
 }

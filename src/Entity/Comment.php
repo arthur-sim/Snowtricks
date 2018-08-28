@@ -81,4 +81,15 @@ class Comment
 
         return $this;
     }
+    
+    public function getTricks()
+    {
+            return $this->tricks;
+    }
+
+    public function setTrick($tricks)
+    {
+            $this->tricks = $tricks;
+            return $this;
+    }
 }
