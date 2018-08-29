@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TricksRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  */
-class Tricks
+class Trick
 {
     /**
      * @ORM\Id()
@@ -38,12 +39,12 @@ class Tricks
     private $user;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="Tricks")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
      */
     protected $comments;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="Tricks")
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
      */
     protected $videos;
 
@@ -92,4 +93,15 @@ class Tricks
     {
             return $this->comments;
     }
+    
+    function getUser() : ?UserInterface{ 
+        return $this->user;
+    }
+
+    function setUser(UserInterface $user):self {
+        $this->user = $user;
+        return $this;
+    }
+
+
 }
