@@ -50,7 +50,7 @@ class TrickController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="trick_show", methods="GET")
+     * @Route("/{id}", name="trick_show", methods="GET") 
      * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithComments"})
      */
     public function show(Trick $trick): Response
