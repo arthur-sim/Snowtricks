@@ -32,12 +32,12 @@ class Comment
     private $create_at;
     
     /**
-    * @ORM\ManyToOne(targetEntity="Tricks", inversedBy="comments")
+    * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="comments")
     */
-    private $post;
+    private $trick;
     
     /**
-    * @ORM\ManyToOne(targetEntity="User")
+    * @ORM\ManyToOne(targetEntity="App\Entity\User")
     */
     private $user;
 
@@ -82,14 +82,14 @@ class Comment
         return $this;
     }
     
-    public function getTricks()
+    public function getTrick()
     {
-            return $this->tricks;
+            return $this->trick;
     }
 
-    public function setTrick($tricks)
+    public function setTrick($trick)
     {
-            $this->tricks = $tricks;
+            $this->trick = $trick;
             return $this;
     }
 }
