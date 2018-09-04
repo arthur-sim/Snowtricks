@@ -20,6 +20,11 @@ class Image
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
+    */
+    private $trick;
 
     public function getId(): ?int
     {

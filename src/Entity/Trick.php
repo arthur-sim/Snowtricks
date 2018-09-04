@@ -47,6 +47,11 @@ class Trick
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
      */
     protected $videos;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
+     */
+    protected $images;
 
     public function getId(): ?int
     {
