@@ -26,5 +26,5 @@ class TrickRepository extends ServiceEntityRepository
 			->where('t.id = :id')->setParameter('id', $id)
 			->getQuery()
 			->getOneOrNullResult();
-	}
+        }
 }
