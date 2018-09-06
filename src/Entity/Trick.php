@@ -49,7 +49,7 @@ class Trick
     protected $videos;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\image", mappedBy="trick")
      */
     protected $images;
 
