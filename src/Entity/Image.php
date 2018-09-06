@@ -42,4 +42,15 @@ class Image
 
         return $this;
     }
+    public function getTrick()
+    {
+            return $this->trick;
+    }
+
+    public function setTrick($trick)
+    {
+            $this->trick = $trick;
+            return $this;
+    }
+    
 }

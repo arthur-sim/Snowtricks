@@ -107,6 +107,10 @@ class Trick
         $this->user = $user;
         return $this;
     }
-
+    
+    public function getImages()
+    {
+            return $this->comments;
+    }   
 
 }
