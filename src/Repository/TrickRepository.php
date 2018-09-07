@@ -21,10 +21,9 @@ class TrickRepository extends ServiceEntityRepository
 
     public function findByIdWithComments($id) {
     	return $this->createQueryBuilder('t')
-			->addSelect('c')
-			->join('t.comments', 'c')
-			->where('t.id = :id')->setParameter('id', $id)
-			->getQuery()
-			->getOneOrNullResult();
-	}
+                ->leftJoin('t.comments', 'c') ->addSelect('c')
+                ->where('t.id = :id')->setParameter('id', $id)
+                ->getQuery()
+                ->getOneOrNullResult();
+        }
 }
