@@ -29,7 +29,7 @@ class Video
     /**
     * @ORM\ManyToOne(targetEntity="Trick", inversedBy="videos")
     */
-    private $post;
+    private $trick;
 
     public function getId(): ?int
     {
@@ -58,5 +58,15 @@ class Video
         $this->id_platform = $id_platform;
 
         return $this;
+    }
+    public function getTrick()
+    {
+            return $this->trick;
+    }
+
+    public function setTrick($trick)
+    {
+            $this->trick = $trick;
+            return $this;
     }
 }

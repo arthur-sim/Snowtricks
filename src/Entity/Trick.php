@@ -103,5 +103,9 @@ class Trick
         return $this;
     }
 
+    public function getVideos()
+    {
+            return $this->videos;
+    }
 
 }
