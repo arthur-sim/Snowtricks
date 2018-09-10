@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use App\Entity\Comment;
+use App\Form\CommentType;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,12 +53,30 @@ class TrickController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="trick_show", methods="GET") 
+     * @Route("/{id}", name="trick_show", methods="GET|POST") 
      * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithComments"})
      */
-    public function show(Trick $trick): Response
+    public function show(Trick $trick, Request $request , UserInterface $user ): Response
     {
-        return $this->render('trick/show.html.twig', ['trick' => $trick]);
+        $comment = new Comment();
+        $comment->setUser($user);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('trick_show');
+        }
+
+        return $this->render('trick/show.html.twig', [
+            'trick' => $trick,
+            'comment' => $comment,
+            'form' => $form->createView(),
+        ]);
+        
     }
 
     /**

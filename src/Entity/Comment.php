@@ -41,6 +41,9 @@ class Comment
     * @ORM\ManyToOne(targetEntity="App\Entity\User")
     */
     private $user;
+    
+    public function __construct() {        
+    }
 
     public function getId(): ?int
     {
