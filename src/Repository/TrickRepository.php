@@ -20,11 +20,19 @@ class TrickRepository extends ServiceEntityRepository
     }
 
     public function findByIdWithComments($id) {
-    	return $this->createQueryBuilder('t')
-			->addSelect('c')
-			->join('t.comments', 'c')
-			->where('t.id = :id')->setParameter('id', $id)
-			->getQuery()
-			->getOneOrNullResult();
-        }
+            return $this->createQueryBuilder('t')
+                            ->leftJoin('t.comments', 'c') ->addSelect('c')
+                            ->where('t.id = :id')->setParameter('id', $id)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+            }
+    
+    public function findByIdWithCommentsAndImages($id) {
+            return $this->createQueryBuilder('t')
+                            ->leftJoin('t.comments', 'c') ->addSelect('c')
+                            ->leftJoin('t.images', 'i') ->addSelect('i')
+                            ->where('t.id = :id')->setParameter('id', $id)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+            }
 }

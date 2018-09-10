@@ -49,7 +49,7 @@ class Trick
     protected $videos;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\image", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick")
      */
     protected $images;
 
@@ -110,7 +110,7 @@ class Trick
     
     public function getImages()
     {
-            return $this->comments;
+            return $this->images;
     }   
 
 }
