@@ -7,7 +7,6 @@ use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,13 +52,14 @@ class TrickController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="trick_show", methods="GET|POST") 
+     * @Route("/{trick}", name="trick_show", methods="GET|POST") 
      * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithComments"})
      */
-    public function show(Trick $trick, Request $request , UserInterface $user ): Response
+    public function show(Trick $trick, Request $request , UserInterface $user): Response
     {
         $comment = new Comment();
-        $comment->setUser($user);
+        $comment->setUser($user)
+                ->setTrick($trick);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -68,7 +68,7 @@ class TrickController extends Controller
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirectToRoute('trick_show');
+            return $this->redirectToRoute('trick_show', ['trick'=>$trick->getId()]);
         }
 
         return $this->render('trick/show.html.twig', [
