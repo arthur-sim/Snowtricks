@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use App\Entity\Image;
+use App\Form\ImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,18 +31,26 @@ class TrickController extends Controller
      * @Route("/new", name="trick_new", methods="GET|POST")
      */
     public function new(Request $request , UserInterface $user ): Response
-    {
+    {                        
         $trick = new Trick();
         $trick->setUser($user);
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
+        $image = new Image();
+        $form = $this->createForm(ImageType::class, $image);
+        $image->setTrick($trick);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $file = $image->getName();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('image_directory'), $fileName);
+            $image->setName($fileName);
+            $em->persist($image);
             $em->persist($trick);
             $em->flush();
 
-            return $this->redirectToRoute('trick_index');
+            return $this->redirectToRoute('trick_index', ['trick'=>$trick->getId()]);
         }
 
         return $this->render('trick/new.html.twig', [
