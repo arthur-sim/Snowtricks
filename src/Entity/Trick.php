@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
@@ -44,10 +45,15 @@ class Trick
     protected $comments;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", cascade={"persist"}, mappedBy="trick")
      */
     protected $videos;
 
+    public function __construct()
+    {
+      $this->videos = new ArrayCollection();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -91,7 +97,7 @@ class Trick
     
     public function getComments()
     {
-            return $this->comments;
+        return $this->comments;
     }
     
     function getUser() : ?UserInterface{ 
@@ -103,9 +109,26 @@ class Trick
         return $this;
     }
 
+    public function addVideo(Video $video)
+    {
+      $this->videos[] = $video;
+
+      // On lie l'annonce à la vidéo
+      $video->setTrick($this);
+
+    return $this;
+    }
+
+    public function removeVideo(Video $video)
+    {
+      $this->videos->removeElement($video);
+      // Et si notre relation était facultative (nullable=true, ce qui n'est pas notre cas ici attention) :        
+      $video->setTrick(null);
+    }
+    
     public function getVideos()
     {
-            return $this->videos;
+      return $this->videos;
     }
 
 }
