@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -52,6 +53,7 @@ class Trick
     public function __construct()
     {
       $this->videos = new ArrayCollection();
+      $this->comments = new ArrayCollection();
     }
     
     public function getId(): ?int
@@ -109,26 +111,58 @@ class Trick
         return $this;
     }
 
-    public function addVideo(Video $video)
+    public function addComment(Comment $comment): self
     {
-      $this->videos[] = $video;
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setTrick($this);
+        }
 
-      // On lie l'annonce à la vidéo
-      $video->setTrick($this);
-
-    return $this;
+        return $this;
     }
 
-    public function removeVideo(Video $video)
+    public function removeComment(Comment $comment): self
     {
-      $this->videos->removeElement($video);
-      // Et si notre relation était facultative (nullable=true, ce qui n'est pas notre cas ici attention) :        
-      $video->setTrick(null);
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getTrick() === $this) {
+                $comment->setTrick(null);
+            }
+        }
+
+        return $this;
     }
-    
-    public function getVideos()
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
     {
-      return $this->videos;
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
+            }
+        }
+
+        return $this;
     }
 
 }
