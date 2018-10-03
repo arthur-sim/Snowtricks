@@ -33,12 +33,11 @@ class TrickController extends Controller
     public function new(Request $request , UserInterface $user ): Response
     {                        
         $trick = new Trick();
+        $image = new Image();
         $trick->setUser($user);
+        $image->setTrick($trick);
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-        $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
-        $image->setTrick($trick);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

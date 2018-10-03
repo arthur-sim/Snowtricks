@@ -17,7 +17,6 @@ class ImageType extends AbstractType
             ->add('name', FileType::class, array(
                  'label' => 'choisissez votre image'   
             ))
-            ->add('submit', SubmitType::class)
         ;
     }   
 
