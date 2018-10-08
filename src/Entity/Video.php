@@ -17,14 +17,9 @@ class Video
     private $id;
 
     /**
-     * @ORM\Column(type="smallint")
-     */
-    private $platform;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $id_platform;
+    private $url;
     
     /**
     * @ORM\ManyToOne(targetEntity="Trick", inversedBy="videos")
@@ -36,30 +31,7 @@ class Video
     {
         return $this->id;
     }
-
-    public function getPlatform(): ?string
-    {
-        return $this->platform;
-    }
-
-    public function setPlatform(string $platform): self
-    {
-        $this->platform = $platform;
-
-        return $this;
-    }
-
-    public function getIdPlatform(): ?string
-    {
-        return $this->id_platform;
-    }
-
-    public function setIdPlatform(string $id_platform): self
-    {
-        $this->id_platform = $id_platform;
-
-        return $this;
-    }
+    
     public function getTrick()
     {
             return $this->trick;
@@ -69,5 +41,17 @@ class Video
     {
             $this->trick = $trick;
             return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
+
+        return $this;
     }
 }
