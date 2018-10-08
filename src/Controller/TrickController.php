@@ -33,19 +33,19 @@ class TrickController extends Controller
     public function new(Request $request , UserInterface $user ): Response
     {                        
         $trick = new Trick();
-        $image = new Image();
         $trick->setUser($user);
-        $image->setTrick($trick);
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $file = $image->getName();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('image_directory'), $fileName);
-            $image->setName($fileName);
-            $em->persist($image);
+            foreach ($trick->getImages() as $image){
+                $file = $image->getFile();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->getParameter('image_directory'), $fileName);
+                $image->setName($fileName);
+                $em->persist($image); 
+            }
             $em->persist($trick);
             $em->flush();
 

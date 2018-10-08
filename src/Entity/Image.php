@@ -15,7 +15,7 @@ class Image
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -27,6 +27,8 @@ class Image
     */
     private $trick;
 
+    private $file;
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +54,15 @@ class Image
     {
             $this->trick = $trick;
             return $this;
+    }
+    
+    function getFile() {
+        return $this->file;
+    }
+
+    function setFile($file) {
+        $this->file = $file;
+        return $this;
     }
     
 }
