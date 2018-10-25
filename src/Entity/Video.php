@@ -19,7 +19,7 @@ class Video
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private $urlIFrame;
     
     /**
     * @ORM\ManyToOne(targetEntity="Trick", inversedBy="videos")
@@ -43,14 +43,14 @@ class Video
             return $this;
     }
 
-    public function getUrl(): ?string
+    public function getUrlIFrame(): ?string
     {
-        return $this->url;
+        return $this->urlIFrame;
     }
 
-    public function setUrl(string $url): self
+    public function setUrlIFrame(string $urlIFrame): self
     {
-        $this->url = $url;
+        $this->urlIFrame = $urlIFrame;
 
         return $this;
     }

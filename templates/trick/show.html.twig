@@ -22,15 +22,7 @@
             <tr>
                 <th>Create_at</th>
                 <td>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Videos</th>
-                <td> 
-                    {% for video in trick.videos %}
-                        {{ video.idPlatform }}
-                    {% endfor %}
-                </td>
-            </tr>        
+            </tr>      
             <tr>
                 <th>Comment</th>
                 <td> 
@@ -50,12 +42,7 @@
     
     {{ include('comment/_form.html.twig') }}
     {% for video in trick.videos %}
-        {% if video.platform == 0 %}
-            <iframe src="https://www.youtube.com/embed/{{ video.idPlatform }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        {% endif %}
-        {% if video.platform == 1 %}
-            <iframe frameborder="0" src="//www.dailymotion.com/embed/video/{{ video.idPlatform }}" allowfullscreen allow="autoplay"></iframe>
-        {% endif %}
+       <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     {% endfor %}
     
 {% endblock %}
