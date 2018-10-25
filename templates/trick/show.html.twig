@@ -32,6 +32,14 @@
                     {% endfor %}
                 </td>
             </tr>
+            <tr>
+                <th>Images</th>
+                <td> 
+                    {% for image in trick.images %}
+                        {{ image.name }}
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
