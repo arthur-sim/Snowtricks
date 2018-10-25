@@ -22,13 +22,27 @@
             <tr>
                 <th>Create_at</th>
                 <td>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>      
+            <tr>
+                <th>Comment</th>
+                <td> 
+                    {% for comment in trick.comments %}
+                        {{ comment.content }}
+                    {% endfor %}
+                </td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('tricks_index') }}">back to list</a>
+    <a href="{{ path('trick_index') }}">back to list</a>
 
-    <a href="{{ path('tricks_edit', {'id': trick.id}) }}">edit</a>
+    <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
 
-    {{ include('tricks/_delete_form.html.twig') }}
+    {{ include('trick/_delete_form.html.twig') }}
+    
+    {{ include('comment/_form.html.twig') }}
+    {% for video in trick.videos %}
+       <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    {% endfor %}
+    
 {% endblock %}

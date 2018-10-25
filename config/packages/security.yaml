@@ -12,6 +12,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: /
             anonymous: true
             
             form_login:
@@ -30,7 +31,7 @@ security:
                 # La route où se trouve le process de deconnexion
                 path: security_logout
                 # La route sur laquelle doit etre rediriger l'utilisateur apres une deconnexion
-                target: index
+                target: index      
 
             # activate different ways to authenticate
 
@@ -44,4 +45,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/edit, roles: ROLE_ADMIN }
+        - { path: ^/new, roles: ROLE_ADMIN }
+        - { path: ^/delete, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

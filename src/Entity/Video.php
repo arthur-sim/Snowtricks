@@ -17,45 +17,40 @@ class Video
     private $id;
 
     /**
-     * @ORM\Column(type="smallint")
-     */
-    private $platform;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $id_platform;
+    private $urlIFrame;
     
     /**
-    * @ORM\ManyToOne(targetEntity="Tricks", inversedBy="videos")
+    * @ORM\ManyToOne(targetEntity="Trick", inversedBy="videos")
+    * @ORM\JoinColumn(nullable = false)
     */
-    private $post;
+    private $trick;
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getPlatform(): ?string
+    
+    public function getTrick()
     {
-        return $this->platform;
+            return $this->trick;
     }
 
-    public function setPlatform(string $platform): self
+    public function setTrick($trick)
     {
-        $this->platform = $platform;
-
-        return $this;
+            $this->trick = $trick;
+            return $this;
     }
 
-    public function getIdPlatform(): ?string
+    public function getUrlIFrame(): ?string
     {
-        return $this->id_platform;
+        return $this->urlIFrame;
     }
 
-    public function setIdPlatform(string $id_platform): self
+    public function setUrlIFrame(string $urlIFrame): self
     {
-        $this->id_platform = $id_platform;
+        $this->urlIFrame = $urlIFrame;
 
         return $this;
     }
