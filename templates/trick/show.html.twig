@@ -1,48 +1,44 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/show.css') }}">
+{% endblock %}
 {% block title %}Tricks{% endblock %}
 
 {% block body %}
-    <h1>Tricks</h1>
+    <div id="show">
+        <div id="bannere">
+            <h1>{{ trick.title }}</h1>
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ trick.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ trick.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ trick.content }}</td>
-            </tr>
-            <tr>
-                <th>Create_at</th>
-                <td>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>      
-            <tr>
-                <th>Comment</th>
-                <td> 
-                    {% for comment in trick.comments %}
-                        {{ comment.content }}
-                    {% endfor %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="item-entry" data-aos="zoom-in" id="media">
+            {% for video in trick.videos %}
+                <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen><p>null</p></iframe>
+            {% endfor %}                
+        </div>
 
-    <a href="{{ path('trick_index') }}">back to list</a>
+            <p id="content">{{ trick.content }}</p>
 
-    <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
-
-    {{ include('trick/_delete_form.html.twig') }}
-    
-    {{ include('comment/_form.html.twig') }}
-    {% for video in trick.videos %}
-       <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    {% endfor %}
-    
+        <div id="center" class="text-center">
+            <p><br/>publié le {{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}<br/>
+        </div>
+        <div id="edit">
+            <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
+            {{ include('trick/_delete_form.html.twig') }}
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <div id="center" class="text-center">
+                <br/>Laissez un commentaire</p>
+                {{ include('comment/_form.html.twig') }}
+            </div>
+        {% endif %}
+        <div id="comments">
+            <h1>Commentaires</h1><br/>
+            {% for comment in trick.comments %}               
+                {{ comment.title }}<br/>
+                {{ comment.content }}
+            {% endfor %}
+        </div>
+        <br/><br/><br/><br/>
+    </div>
+   
 {% endblock %}
