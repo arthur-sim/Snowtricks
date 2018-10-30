@@ -175,8 +175,13 @@ class Trick
 
         return $this;
     }
+    
+    function setImages($images) {
+        $this->images = $images;
+        return $this;
+    }
 
-    public function addImage(Image $image): self
+        public function addImage(Image $image): self
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
