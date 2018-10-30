@@ -3,189 +3,76 @@
 {% block title %}index{% endblock %}
 
 {% block body %}
+    
+        
+    {# On charge la bibliothèque jQuery. Ici, je la prends depuis le CDN google
+       mais si vous l'avez en local, changez simplement l'adresse. #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
     <div class="nav justify-content-left" id="bannere">
         <h1>Phrase d'accorche</h1>
     </div>
-    
+
     <div class="row entries-wrap wide">
-            <div class="entries" >
-
+        <div class="entries" >
+            {% for trick in tricks|slice(0, 8) %}
                 <article class="col-block">
-                    
+
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
                             <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
                         </div>
-        
+
                         <div class="item-entry__text">    
-    
-                            <h1 class="item-entry__title"><a href="single-standard.html">3 Benefits of Minimalism In Interior Design.</a></h1>
-                                
+
+                            <h1 class="item-entry__title"><a href="single-standard.html">{{ trick.title }}</a></h1>
+
                             <div class="item-entry__date">
-                                <p>June 15, 2018</p>
+                                <p>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</p>
                             </div>
                         </div>
                     </div> <!-- item-entry -->
 
                 </article> <!-- end article -->
+            {% else %}
+                <p colspan="5">no records found</p>
+            {% endfor %}
+            
+                <span id="loadmore" class="btn btn-default">Load more</span>
+            
+            <script type="text/javascript">
+                var element = document.getElementById('loadmore');
+                element.onclick = function() {
+                    alert("Vous m'avez cliqué !");
+                };
+            </script>           
 
-                <article class="col-block">
-                    
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                        </div>
-        
-                        <div class="item-entry__text">
-                            
+        </div> <!-- end entries -->
+    </div> <!-- end entries-wrap -->
     
-                            <h1 class="item-entry__title"><a href="single-standard.html">10 Interesting Facts About Caffeine.</a></h1>
-                                
-                            <div class="item-entry__date">
-                                <p>June 15, 2018</p>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
+    <br/><br/><br/><br/><br/>
     
-                </article> <!-- end article -->
+    {% for trick in tricks|slice(9, 100) %}
+                        <article class="col-block" id="hidden">
 
-                <article class="col-block">
-                    
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                        </div>
-        
-                        <div class="item-entry__text">
-                            
-    
-                            <h1 class="item-entry__title"><a href="single-standard.html">The Power of Music to Reduce Stress.</a></h1>
-                                
-                            <div class="item-entry__date">
-                                <p>June 15, 2018</p>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-    
-                </article> <!-- end article -->
+                            <div class="item-entry" data-aos="zoom-in">
+                                <div class="item-entry__thumb">
+                                    <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
+                                </div>
 
-                <article class="col-block">
-                
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                        </div>
-        
-                        <div class="item-entry__text">
-                            
-    
-                            <h1 class="item-entry__title"><a href="single-standard.html">The Pomodoro Technique Really Works.</a></h1>
-                                
-                            <div class="item-entry__date">
-                                <p>June 15, 2018</p>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
+                                <div class="item-entry__text">    
 
-                </article> <!-- end article -->
+                                    <h1 class="item-entry__title"><a href="single-standard.html">{{ trick.title }}</a></h1>
 
-                <article class="col-block">
-                
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                        </div>
-        
-                        <div class="item-entry__text">
-                            
-    
-                            <h1 class="item-entry__title"><a href="single-standard.html">Visiting Theme Parks Improves Your Health.</a></h1>
-                                
-                            <div class="item-entry__date">
-                                <p>June 15, 2018</p>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-    
-                </article> <!-- end article -->
+                                    <div class="item-entry__date">
+                                        <p>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</p>
+                                    </div>
+                                </div>
+                            </div> <!-- item-entry -->
 
-                <article class="col-block">
-                
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                        </div>
-        
-                        <div class="item-entry__text">
-                            
-                            <h1 class="item-entry__title"><a href="single-standard.html">What Your Music Preference Says About You and Your Personality.</a></h1>
-                                
-                            <div class="item-entry__date">
-                                <p>June 15, 2018</p>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-    
-                </article> <!-- end article -->
-
-                <article class="col-block">
-                
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                        </div>
-        
-                        <div class="item-entry__text">
-                            
-                            <h1 class="item-entry__title"><a href="single-standard.html">Create Meaningful Family Moments.</a></h1>
-                                
-                            <div class="item-entry__date">
-                                <p>June 15, 2018</p>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-    
-                </article> <!-- end article -->
-
-                <article class="col-block">
-                
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                        </div>
-        
-                        <div class="item-entry__text">
-                            
-                            <h1 class="item-entry__title"><a href="single-standard.html">Gardening: The Secret to Happiness.</a></h1>
-                                
-                            <div class="item-entry__date">
-                                <p>June 15, 2018</p>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-    
-                </article> <!-- end article -->
-
-                <article class="col-block">
-                
-                    <div class="item-entry" data-aos="zoom-in">
-                        <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                        </div>
-        
-                        <div class="item-entry__text">
-                            
-                            <h1 class="item-entry__title"><a href="single-standard.html">An Examination of Minimalistic Design.</a></h1>
-                                
-                            <div class="item-entry__date">
-                                <p>June 15, 2018</p>
-                            </div>
-                        </div>
-                    </div> <!-- item-entry -->
-    
-                </article> <!-- end article -->
-
-            </div> <!-- end entries -->
-        </div> <!-- end entries-wrap -->
+                        </article> <!-- end article -->
+                    {% else %}
+                        <p colspan="5">no records found</p>
+                    {% endfor %}
 {% endblock %}
 

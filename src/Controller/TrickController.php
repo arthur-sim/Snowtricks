@@ -57,14 +57,14 @@ class TrickController extends Controller
      * @Route("/{id}", name="trick_show", methods="GET|POST") 
      * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithCommentsAndVideos"})
      */
-    public function show(Trick $trick, Request $request , UserInterface $user ): Response
+    public function show(Trick $trick, Request $request , UserInterface $user=null ): Response
     {
         $comment = new Comment();
-        $comment->setUser($user);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $user !== null) {
+            $comment->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
