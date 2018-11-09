@@ -2,7 +2,7 @@
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/show.css') }}">
     <style>
-        
+
     </style>
 {% endblock %}
 {% block title %}Tricks{% endblock %}
@@ -12,36 +12,37 @@
         <div id="bannere">
             <h1>{{ trick.title }}</h1>
         </div>
-
-        <div class="item-entry" data-aos="zoom-in" id="media">
-            {% for video in trick.videos %}
-                <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen><p>null</p></iframe>
-            {% endfor %}                
-        </div>
+        <div id="show_2">
+            <div class="item-entry" data-aos="zoom-in" id="media">
+                {% for video in trick.videos %}
+                    <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen><p>null</p></iframe>
+                    {% endfor %}                
+            </div>
 
             <p id="content">{{ trick.content }}</p>
 
-        <div id="center" class="text-center">
-            <p><br/>publié le {{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}<br/>
-        </div>
-        <div id="edit">
-            <a href="{{ path('trick_edit', {'id': trick.id}) }}">edit</a>
-            {{ include('trick/_delete_form.html.twig') }}
-        </div>
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div id="center" class="text-center">
-                <br/>Laissez un commentaire</p>
-                {{ include('comment/_form.html.twig') }}
+                <p><br/>publié le {{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}<br/>
             </div>
-        {% endif %}
-        <div id="comments">
-            <h1>Commentaires</h1><br/>
-            {% for comment in trick.comments %}               
-                {{ comment.title }}<br/>
-                {{ comment.content }}
-            {% endfor %}
+            <div id="editdelete">
+                <a href="{{ path('trick_edit', {'id': trick.id}) }}"><img src="../../../public/css/images/edit.png" alt="canard"/></a>
+                <a href="{{ path('trick_delete',{'id': trick.id}) }}"><img src="../../../public/css/images/delete.png" alt="canard"/></a>
+            </div>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <div id="center" class="text-center">
+                    <br/>Laissez un commentaire</p>
+                    {{ include('comment/_form.html.twig') }}
+                </div>
+            {% endif %}
+            <div id="comments">
+                <h1>Commentaires</h1><br/>
+                {% for comment in trick.comments %}               
+                    {{ comment.title }}<br/>
+                    {{ comment.content }}
+                {% endfor %}
+            </div>
+            <br/><br/><br/><br/>
         </div>
-        <br/><br/><br/><br/>
     </div>
-   
+
 {% endblock %}

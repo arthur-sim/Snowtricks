@@ -1,36 +1,31 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}">
+{% endblock %}
 {% block title %}register{% endblock %}
 
 {% block body %}
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey }}
+        </div>
+    {% endif %}
 
-{% if error %}
-    <div class="alert alert-danger">
-        {{ error.messageKey }}
+    <div class="container">
+        <form action="{{ path('security_login') }}" method="post" id="join-us">
+            <h3>Nom d'utilisateur</h3>
+            <span>
+                <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+            </span>
+            <br/>
+            <h3>Mot de passe</h3>
+            <span>
+                <input type="password" id="password" name="_password"/>
+            </span>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+            <div class="submit">
+                <button type="submit" value="Submit">Submit</button>
+            </div>
+        </form>
     </div>
-{% endif %}
-
-<div class="container">
-  <h2>c'est maintenant ou jamais</h2>
-  <h1>Enregistrez vous !</h1>
-
-  <form action="{{ path('security_login') }}" id="join-us">
-    <div class="fields">
-        <h3>Nom d'utilisateur</h3>
-    <span>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-    </span>
-    <br/>
-        <h3>Mot de passe</h3>
-    <span>
-       <input type="password" id="password" name="_password" />
-    </span>
-    </div>
-    <div class="submit">
-        <button type="submit" value="Submit">Submit</button>
-    </div>
-  </form>
-</div>
-           
-
 {% endblock %}

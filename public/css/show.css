@@ -15,8 +15,8 @@
     color: white;
     font-size: 4em;
 }
-#media{
-    width: 95%;
+#show_2{
+    width: 90%;
     margin: auto;
 }
 iframe{
@@ -24,20 +24,23 @@ iframe{
     margin-left: 2%;
 }
 #show #content{
-    width: 80%;
-    margin: auto;
     margin-top: 2%;
 }
 #show p #date #content{
     text-align: center;
 }
 #comments{
-    width: 65%;
+    width: 85%;
     margin: auto;
     margin-top: 2%;
 }
-#edit{
+#editdelete{
     display: flex;
-    width: 80%;
-    margin: auto;
+    width: 30%;
+}
+#editdelete a{
+    margin-left:3%;
+}
+#editdelete img{
+    width:75%;
 }
