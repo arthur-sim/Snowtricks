@@ -27,7 +27,7 @@ class Video
     private $id_platform;
     
     /**
-    * @ORM\ManyToOne(targetEntity="Tricks", inversedBy="videos")
+    * @ORM\ManyToOne(targetEntity="Trick", inversedBy="videos")
     */
     private $post;
 
