@@ -35,3 +35,7 @@ services:
     App\EventSubscriber\RegistrationNotifySubscriber:
         # le nom de la variable que l'on utilisera dans le service
         $sender: '%app.notifications.email_sender%'
+        
+    App\Listener\Doctrine\VideoListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
