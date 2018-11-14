@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -49,11 +50,18 @@ class Trick
      * @ORM\OneToMany(targetEntity="App\Entity\Video", cascade={"persist"}, mappedBy="trick")
      */
     protected $videos;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", cascade={"persist"},  mappedBy="trick")
+     */
+    protected $images;
 
     public function __construct()
     {
       $this->videos = new ArrayCollection();
       $this->comments = new ArrayCollection();
+      $this->images = new ArrayCollection();
+
     }
     
     public function getId(): ?int
@@ -110,6 +118,11 @@ class Trick
         $this->user = $user;
         return $this;
     }
+    
+    public function getImages()
+    {
+            return $this->images;
+    }
 
     public function addComment(Comment $comment): self
     {
@@ -164,5 +177,33 @@ class Trick
 
         return $this;
     }
+    
+    function setImages($images) {
+        $this->images = $images;
+        return $this;
+    }
+
+        public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getTrick() === $this) {
+                $image->setTrick(null);
+            }
+        }
+
+        return $this;
+    }   
 
 }
