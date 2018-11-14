@@ -80,19 +80,20 @@ class TrickController extends Controller {
     /**
      * @Route("/{id}/edit", name="trick_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Trick $trick): Response {
+    public function edit(Request $request, Trick $trick): Response
+    {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('trick_edit', ['id' => $trick->getId()],['id' => $video->getId()]);
+            return $this->redirectToRoute('trick_edit', ['id' => $trick->getId()]);
         }
 
         return $this->render('trick/edit.html.twig', [
-                    'trick' => $trick,
-                    'form' => $form->createView(),
+            'trick' => $trick,
+            'form' => $form->createView(),
         ]);
     }
 
