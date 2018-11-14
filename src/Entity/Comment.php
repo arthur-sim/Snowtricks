@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
@@ -40,6 +41,9 @@ class Comment
     * @ORM\ManyToOne(targetEntity="App\Entity\User")
     */
     private $user;
+    
+    public function __construct() {        
+    }
 
     public function getId(): ?int
     {
@@ -91,5 +95,13 @@ class Comment
     {
             $this->trick = $trick;
             return $this;
+    }
+    function getUser() : ?UserInterface{ 
+        return $this->user;
+    }
+
+    function setUser(UserInterface $user):self {
+        $this->user = $user;
+        return $this;
     }
 }

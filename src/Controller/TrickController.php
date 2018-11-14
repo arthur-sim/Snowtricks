@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Video;   
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,8 +52,8 @@ class TrickController extends Controller {
     }
 
     /**
-     * @Route("/{id}", name="trick_show", methods="GET") 
-     * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithComments"})
+     * @Route("/{id}", name="trick_show", methods="GET|POST") 
+     * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithCommentsAndVideos"})
      */
     public function show(Trick $trick): Response {
         return $this->render('trick/show.html.twig', ['trick' => $trick]);
@@ -66,7 +69,7 @@ class TrickController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('trick_edit', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('trick_edit', ['id' => $trick->getId()],['id' => $video->getId()]);
         }
 
         return $this->render('trick/edit.html.twig', [
