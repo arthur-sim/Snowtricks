@@ -1,5 +1,5 @@
 parameters:
-    locale: 'en'
+    locale: 'fr'
     app.notifications.email_sender: arthuursimonian@gmail.com
     image_directory: '%kernel.project_dir%/public/images'
 

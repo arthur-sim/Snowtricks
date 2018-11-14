@@ -55,8 +55,26 @@ class TrickController extends Controller {
      * @Route("/{id}", name="trick_show", methods="GET|POST") 
      * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithCommentsAndVideos"})
      */
-    public function show(Trick $trick): Response {
-        return $this->render('trick/show.html.twig', ['trick' => $trick]);
+    public function show(Trick $trick, Request $request , UserInterface $user=null ): Response
+    {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && $user !== null) {
+            $comment->setUser($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('trick_show');
+        }
+
+        return $this->render('trick/show.html.twig', [
+            'trick' => $trick,
+            'comment' => $comment,
+            'form' => $form->createView(),
+        ]);       
     }
 
     /**
