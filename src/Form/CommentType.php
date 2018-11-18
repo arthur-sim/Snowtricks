@@ -16,7 +16,6 @@ class CommentType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('create_at')
         ;
     }
 

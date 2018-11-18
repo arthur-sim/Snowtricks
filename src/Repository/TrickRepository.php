@@ -27,9 +27,10 @@ class TrickRepository extends ServiceEntityRepository
                             ->getOneOrNullResult();
             }
     
-    public function findByIdWithCommentsAndImages($id) {
+    public function findByIdWithCommentsAndImagesAndVideos($id) {
             return $this->createQueryBuilder('t')
                             ->leftJoin('t.comments', 'c') ->addSelect('c')
+                            ->leftJoin('t.videos', 'v') ->addSelect('v')
                             ->leftJoin('t.images', 'i') ->addSelect('i')
                             ->where('t.id = :id')->setParameter('id', $id)
                             ->getQuery()

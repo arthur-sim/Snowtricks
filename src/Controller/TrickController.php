@@ -53,7 +53,7 @@ class TrickController extends Controller {
 
     /**
      * @Route("/{id}", name="trick_show", methods="GET|POST") 
-     * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithCommentsAndVideos"})
+     * @ParamConverter("trick", class="App:Trick", options={"repository_method" = "findByIdWithCommentsAndImagesAndVideos"})
      */
     public function show(Trick $trick, Request $request , UserInterface $user=null ): Response
     {

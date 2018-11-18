@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use DateTime;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
@@ -42,7 +42,8 @@ class Comment
     */
     private $user;
     
-    public function __construct() {        
+    public function __construct() {  
+        $this->create_at=new DateTime('now');
     }
 
     public function getId(): ?int

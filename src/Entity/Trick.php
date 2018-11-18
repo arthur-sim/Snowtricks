@@ -6,8 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-
+use DateTime;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
  */
@@ -61,6 +60,7 @@ class Trick
       $this->videos = new ArrayCollection();
       $this->comments = new ArrayCollection();
       $this->images = new ArrayCollection();
+      $this->create_at=new DateTime('now');
 
     }
     
