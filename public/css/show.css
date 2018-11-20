@@ -19,6 +19,15 @@
     width: 90%;
     margin: auto;
 }
+#div-image{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 2%;
+    margin-left: 2%;
+    width: 300px;
+    height: 160px;
+}
 iframe{
     margin-top: 2%;
     margin-left: 2%;

@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
-{% block stylesheet %}
+
+{% block title %}index{% endblock %}
+
+{% block stylesheets %}
     <style>
-        div#hidden{display: none;}
-        div#unhidden{
-            margin-top: -4%;
+        #trick-hidden {
+            display: none;
+        }
+        #hidden {
+            display: none;
         }
     </style>
 {% endblock %}
-{% block title %}index{% endblock %}
 
 {% block body %}
 
@@ -22,17 +26,19 @@
 
     <div class="row entries-wrap wide">
         <div class="entries" >
-            {% for trick in tricks|slice(0, 8) %}
-                <article class="col-block">
+            {% for trick in tricks %}
+                <article {% if loop.index > 10 %} id="trick-hidden" {% endif %} class="col-block" >
 
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
-                            <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
+                            {% for image in trick.images|slice(0,1) %}
+                                <img src="../images/{{image.name}}" height="250vh" alt="">
+                            {% endfor %}
                         </div>
 
                         <div class="item-entry__text">    
 
-                            <h1 class="item-entry__title"><a href="single-standard.html">{{ trick.title }}</a></h1>
+                            <h1 class="item-entry__title"><a href="/Snowtricks/public/index.php/trick/{{ trick.id }}">{{ trick.title }}</a></h1>
 
                             <div class="item-entry__date">
                                 <p>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</p>
@@ -46,49 +52,46 @@
             {% endfor %}
         </div>
     </div>
-    <div  id="hidden">
-        <div class="row entries-wrap wide">
-            <div class="entries" >
-                {% for trick in tricks|slice(9, 100) %}
-                    <article class="col-block">
-
-                        <div class="item-entry" data-aos="zoom-in">
-                            <div class="item-entry__thumb">
-                                <img src="{{ asset('css/images/fond-snowboard.jpg') }}" height="250vh" alt="">
-                            </div>
-
-                            <div class="item-entry__text">    
-
-                                <h1 class="item-entry__title"><a href="single-standard.html">{{ trick.title }}</a></h1>
-
-                                <div class="item-entry__date">
-                                    <p>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</p>
-                                </div>
-                            </div>
-                        </div> <!-- item-entry -->
-
-                    </article> <!-- end article -->
-                {% else %}
-                    <p colspan="5">no records found</p>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
     <div id="buttonloadmore">
-        <button id="loadmore" class="btn btn-default">Load more</button>   
+        <button id="add-more" class="btn btn-default" >Load more</button>   
     </div>
+    <a href="{{ path('trick_new') }}">Create new</a>    
+    <script>
+		var $addMoreList = document.querySelectorAll('#add-more');
 
-    <script type="text/javascript">
-        var element = document.getElementById('loadmore');
-        function yHandler() {
-            var unhidden = document.getElementById('hidden');
-            unhidden.id = "unhidden";
-            var hidden = document.getElementById('buttonloadmore');
-            hidden.id = "hidden";
-        }
-        element.onclick = yHandler;
+		for ($addMore of $addMoreList) {
+			$addMore.addEventListener('click', function () {
+				displayNext5Tricks();
+			});
+		}
+
+		checkDisplayAddMore();
+
+		function displayNext5Tricks() {
+			var $tricksHidden = document.querySelectorAll('#trick-hidden');
+
+			var i = 0;
+			for ($trickHidden of $tricksHidden) {
+				if (i >= 5) {
+					continue;
+				}
+
+				$trickHidden.classList.remove('trick-hidden');
+
+				i++;
+			}
+
+			checkDisplayAddMore();
+		}
+
+		function checkDisplayAddMore() {
+			if (document.querySelectorAll('#trick-hidden').length === 0) {
+				for ($addMore of $addMoreList) {
+					$addMore.classList.add('hidden');
+				}
+			}
+		}
     </script>
-
     <br/><br/><br/><br/><br/>
 
 {% endblock %}

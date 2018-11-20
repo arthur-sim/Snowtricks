@@ -23,6 +23,9 @@ body{
     width: 100%;
     height: 100vh;
     background-image: url("images/fond-snowboard.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 #bannere h1{
     line-height:100vh; /* centrage vertical */

@@ -9,16 +9,22 @@
 
 {% block body %}
     <div id="show">
-        <div id="bannere">
-            <h1>{{ trick.title }}</h1>
-        </div>
+        {% for image in trick.images|slice(0,1) %}
+            <div id="bannere" style='background-image:url("../../../public/images/{{image.name}}");'>
+                <h1>{{ trick.title }}</h1>
+            </div>
+        {% endfor %} 
         <div id="show_2">
-            <div class="item-entry" data-aos="zoom-in" id="media">
+                        
+            <div class="item-entry" data-aos="zoom-in" id="media" id="image">
+                {% for image in trick.images|slice(1,100000) %}
+                    <div id="div-image" style='background-image:url("../../../public/images/{{image.name}}");'></div>
+                {% endfor %}
                 {% for video in trick.videos %}
                     <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen><p>null</p></iframe>
-                    {% endfor %}                
+                {% endfor %}
             </div>
-
+            
             <p id="content">{{ trick.content }}</p>
 
             <div id="center" class="text-center">
