@@ -1,16 +1,57 @@
 {% extends 'base.html.twig' %}
 {% block stylesheet %}
-    {#<link rel="stylesheet" type="text/css" href="{{ asset('css/register.css') }}">#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/new.css') }}">
 {% endblock %}
 {% block title %}New Tricks{% endblock %}
 
 {% block body %}
-    <br><br><br><br><br><br>
-    {{ include('trick/_form.html.twig') }}
-    {{ form_widget(form.videos) }}
-    <a href="#" id="add_video" class="btn btn-default">Ajouter une vidéo</a>
-    {{ form_widget(form.images) }}
-    <a href="#" id="add_image" class="btn btn-default">Ajouter une image</a>
+    <div class="container">
+        <h2>Un trick manquant ?</h2>
+        <h1>Ajoutez le !</h1>
+
+        {{ form_start(form) }}
+        <div class="fields">
+            <h3>Titre</h3>
+            <br/>
+            <span>
+                {{ form_widget(form.title) }}
+                {{ form_errors(form.title) }}
+            </span>
+            <br/>
+            <h3>Contenu</h3>
+            <br/>
+            <span>
+                {{ form_widget(form.content) }}
+                {{ form_errors(form.content) }}
+            </span>
+            <br/>
+            <div>
+                <h3>Image</h3>
+                <br/>
+                <span>
+                    {{ form_widget(form.images) }}
+                    {{ form_errors(form.images) }}
+                </span>
+            </div>
+                <a href="#" id="add_image" class="btn btn-default">Ajouter une image</a>
+            <br/>
+            <div>
+                <h3>Video</h3>
+                <br/>
+                <span>
+                    {{ form_widget(form.videos) }}
+                    {{ form_errors(form.videos) }}
+                </span>
+            </div>
+                <a href="#" id="add_video" class="btn btn-default">Ajouter une vidéo</a>
+            <br/>            
+        </div>
+        <div class="submit">
+            <button type="submit" value="Submit">Submit</button>
+            <br/><br/><br/><br/>
+        </div>    
+        {{ form_end(form) }}
+    </div>
     {#
     <div class="container">
         <h2>Create new Tricks</h2>
@@ -42,7 +83,7 @@
         {{ form_end(form) }}
     </div>
     #}
-   
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

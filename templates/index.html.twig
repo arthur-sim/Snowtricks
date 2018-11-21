@@ -21,7 +21,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <div class="nav justify-content-left" id="bannere">
-        <h1>Phrase d'accorche</h1>
+        <h1>Le snow a portée de main</h1>
     </div>
 
     <div class="row entries-wrap wide">
@@ -55,7 +55,9 @@
     <div id="buttonloadmore">
         <button id="add-more" class="btn btn-default" >Load more</button>   
     </div>
-    <a href="{{ path('trick_new') }}">Create new</a>    
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a href="{{ path('trick_new') }}">Create new</a>    
+    {% endif %}
     <script>
 		var $addMoreList = document.querySelectorAll('#add-more');
 

@@ -11,46 +11,54 @@
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
 
             <div class="collapse navbar-collapse" class="form-inline my-2 my-lg-0" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/Snowtricks/public/index.php">Snowtricks <span class="sr-only">(current)</span></a>
-                </li>
-                <!-- <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tricks
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
-                </li> -->
-                <li class="nav-item">
-                  <a class="nav-link" href="/Snowtricks/public/index.php/login">Se connecter</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/Snowtricks/public/index.php/register">S'inscrire</a>
-                </li>
-              </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Snowtricks/public/index.php/">Snowtricks <span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tricks
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </li> -->
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Snowtricks/public/index.php/login">Se déconnecter</a>
+                        </li>
+
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Snowtricks/public/index.php/login">Se connecter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Snowtricks/public/index.php/register">S'inscrire</a>
+                        </li> 
+                    {% endif %}
+
+                </ul>
             </div>
-          </nav>
+        </nav>
+    </div>
+    {% block body %}{% endblock %}
+    <!-- Footer -->
+    <footer class="page-footer font-small blue fixed-bottom">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="http://localhost/Snowtricks/public/index.php/"> Snowtricks.com</a>
         </div>
-        {% block body %}{% endblock %}
-        <!-- Footer -->
-            <footer class="page-footer font-small blue fixed-bottom">
+        <!-- Copyright -->
 
-              <!-- Copyright -->
-              <div class="footer-copyright text-center py-3">© 2018 Copyright:
-                <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Snowtricks.com</a>
-              </div>
-              <!-- Copyright -->
-
-            </footer>
-        <!-- Footer -->
-        {% block javascripts %}
-            <script href="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-            <script href="{{ asset('vendor/bootstrap/bootstrap.min.js') }}"></script>
-        {% endblock %}
-    </body>
+    </footer>
+    <!-- Footer -->
+    {% block javascripts %}
+        <script href="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+        <script href="{{ asset('vendor/bootstrap/bootstrap.min.js') }}"></script>
+    {% endblock %}
+</body>
 </html>
