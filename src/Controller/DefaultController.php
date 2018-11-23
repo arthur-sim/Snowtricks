@@ -16,5 +16,10 @@ class DefaultController extends Controller
     {
         return $this->render('index.html.twig', ['tricks' => $trickRepository->findAll()]);
     }
- 
+    /**
+     * @Route("/", name="admin")
+     */
+    public function admin(){
+        return $this->render('index.html.twig', ['tricks' => $trickRepository->findAll()]);
+    }
 }

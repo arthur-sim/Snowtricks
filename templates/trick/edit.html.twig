@@ -1,61 +1,49 @@
 {% extends 'base.html.twig' %}
 {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/show.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/edit.css') }}">
     <style> 
     </style>
 {% endblock %}
 {% block title %}Edit Tricks{% endblock %}
 
 {% block body %}
-    
-    
+
+    {{ form_start(form) }}
+
     <div id="show">
         {% for image in trick.images|slice(0,1) %}
             <div id="bannere" style='background-image:url("../../../images/{{image.name}}");'>
-                <h1>{{ trick.title }}</h1>
+                <h1>{{ form_row(form.title) }}</h1>
             </div>
         {% endfor %} 
         <div id="show_2">
-            
-            <div class="item-entry" data-aos="zoom-in" id="media" id="image">
+
+            <div class="item-entry" data-aos="zoom-in" id="media" id="image" style="display:flex;" >
                 {% for image in trick.images|slice(1,100000) %}
-                    <div id="div-image">
-                        <div id="div-image" style='background-image:url("../../../images/{{image.name}}");'></div>
-                        <a href="">Supprimer</a>
-                    </div>
+                    <div id="div-image" style='background-image:url("../../../images/{{image.name}}");'></div>
+                    <a href="">Supprimer</a>
                 {% endfor %}
                 {% for video in trick.videos %}
-                    <div id="div-image">
-                        <iframe id="div-image" src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen><p>null</p></iframe>
-                        <a href="">Supprimer</a>
-                    </div>
+                    <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen><p>null</p></iframe>
+                    <a href="">Supprimer</a>
                 {% endfor %}
             </div>
-            
             <br>
+            <p id="content">{{ form_row(form.content) }}</p>
             
-            <p id="content">{{ trick.content }}</p>
-
+            <a href="#" id="add_image" class="btn btn-default">Ajouter une image</a>
+            
+            <a href="#" id="add_video" class="btn btn-default">Ajouter une vidéo</a>
+            
             <div id="center" class="text-center">
                 <p><br/>publié le {{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}<br/>
             </div>
-
-            <h1>Edit Tricks</h1>
-
-    {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="#" id="add_image" class="btn btn-default">Ajouter une image</a>
-    {{ form_row(form.images) }}
-    <a href="#" id="add_video" class="btn btn-default">Ajouter une vidéo</a>
-    {{ form_row(form.videos) }}
-
-    {{ include('trick/_delete_form.html.twig') }}
-            <br/><br/><br/><br/>
+            {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
+            <br/><br/><br/>
         </div>
     </div>
-    
- 
-
+    {{ form_end(form) }}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

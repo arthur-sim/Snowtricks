@@ -22,7 +22,7 @@ class Video
     private $urlIFrame;
     
     /**
-    * @ORM\ManyToOne(targetEntity="Trick", inversedBy="videos")
+    * @ORM\ManyToOne(targetEntity="Trick", inversedBy="videos", cascade={"persist", "remove"})
     */
     private $trick;
 

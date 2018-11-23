@@ -33,7 +33,7 @@ class Comment
     private $create_at;
     
     /**
-    * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="comments")
+    * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="comments", cascade={"persist", "remove"})
     */
     private $trick;
     

@@ -22,13 +22,6 @@ use App\Service\FileUploader;
 class TrickController extends Controller {
 
     /**
-     * @Route("/", name="trick_index", methods="GET")
-     */
-    public function index(TrickRepository $trickRepository): Response {
-        return $this->render('trick/index.html.twig', ['tricks' => $trickRepository->findAll()]);
-    }
-
-    /**
      * @Route("/new", name="trick_new", methods="GET|POST")
      */
     public function new(Request $request, UserInterface $user): Response {
@@ -42,7 +35,7 @@ class TrickController extends Controller {
             $em->persist($trick);
             $em->flush();
 
-            return $this->redirectToRoute('trick_index', ['trick' => $trick->getId()]);
+            return $this->redirectToRoute('index', ['trick' => $trick->getId()]);
         }
 
         return $this->render('trick/new.html.twig', [
@@ -63,6 +56,7 @@ class TrickController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid() && $user !== null) {
             $comment->setUser($user);
+            $comment->getTrick($trick);
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
@@ -98,7 +92,7 @@ class TrickController extends Controller {
     }
 
     /**
-     * @Route("/{id}", name="trick_delete", methods="DELETE")
+     * @Route("/{id}/delete", name="trick_delete")
      */
     public function delete(Request $request, Trick $trick): Response {
         if ($this->isCsrfTokenValid('delete' . $trick->getId(), $request->request->get('_token'))) {
@@ -107,7 +101,7 @@ class TrickController extends Controller {
             $em->flush();
         }
 
-        return $this->redirectToRoute('trick_index');
+        return $this->redirectToRoute('index');
     }
 
 }

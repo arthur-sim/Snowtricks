@@ -53,3 +53,37 @@ iframe{
 #editdelete img{
     width:75%;
 }
+
+label{
+    display:none;
+}
+.submit button{ 
+    background:#9bc8dd ! important;
+    color:#fff;
+    position:relative;
+    left:9px;
+    top:25px; 
+    width:120px;
+    height:40px;
+    cursor:pointer;
+    border-radius:22px;
+    border:1px solid #9bc8dd;
+}
+.submit button{ 
+    background:#9bc8dd ! important;
+    color:#fff;
+    position:relative;
+    left:9px;
+    top:25px; 
+    width:120px;
+    height:40px;
+    cursor:pointer;
+    border-radius:22px;
+    border:1px solid #9bc8dd;
+}
+input{
+    height:34px;
+    border-radius:22px;
+    width:220px;
+    padding:0 18px; 
+}

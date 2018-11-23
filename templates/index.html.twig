@@ -2,12 +2,12 @@
 
 {% block title %}index{% endblock %}
 
-{% block stylesheets %}
+{% block stylesheet %}
     <style>
-        #trick-hidden {
+        .trick-hidden {
             display: none;
         }
-        #hidden {
+        .hidden {
             display: none;
         }
     </style>
@@ -27,7 +27,7 @@
     <div class="row entries-wrap wide">
         <div class="entries" >
             {% for trick in tricks %}
-                <article {% if loop.index > 10 %} id="trick-hidden" {% endif %} class="col-block" >
+                <article class="col-block {% if loop.index > 12 %}trick-hidden{% endif %}" >
 
                     <div class="item-entry" data-aos="zoom-in">
                         <div class="item-entry__thumb">
@@ -70,11 +70,11 @@
 		checkDisplayAddMore();
 
 		function displayNext5Tricks() {
-			var $tricksHidden = document.querySelectorAll('#trick-hidden');
+			var $tricksHidden = document.querySelectorAll('.trick-hidden');
 
 			var i = 0;
 			for ($trickHidden of $tricksHidden) {
-				if (i >= 5) {
+				if (i >= 4) {
 					continue;
 				}
 
@@ -87,7 +87,7 @@
 		}
 
 		function checkDisplayAddMore() {
-			if (document.querySelectorAll('#trick-hidden').length === 0) {
+			if (document.querySelectorAll('.trick-hidden').length === 0) {
 				for ($addMore of $addMoreList) {
 					$addMore.classList.add('hidden');
 				}

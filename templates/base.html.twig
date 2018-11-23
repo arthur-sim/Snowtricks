@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse" class="form-inline my-2 my-lg-0" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/Snowtricks/public/index.php/">Snowtricks <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path('index') }}">Snowtricks <span class="sr-only">(current)</span></a>
                     </li>
                     <!-- <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -28,15 +28,15 @@
                     </li> -->
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/Snowtricks/public/index.php/login">Se déconnecter</a>
+                            <a class="nav-link" href="{{ path('security_logout') }}">Se déconnecter</a>
                         </li>
 
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/Snowtricks/public/index.php/login">Se connecter</a>
+                            <a class="nav-link" href="{{ path('security_login') }}">Se connecter</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Snowtricks/public/index.php/register">S'inscrire</a>
+                            <a class="nav-link" href="{{ path('user_registration') }}">S'inscrire</a>
                         </li> 
                     {% endif %}
 
@@ -50,7 +50,7 @@
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="http://localhost/Snowtricks/public/index.php/"> Snowtricks.com</a>
+            <a href="{{ path('index') }}"> Snowtricks.com</a>
         </div>
         <!-- Copyright -->
 
