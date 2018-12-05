@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Controller;
-
-use App\Entity\Video;   
+ 
 use App\Entity\Trick;
 use App\Form\TrickType;
-use App\Repository\TrickRepository;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\Service\FileUploader;
-
 /**
  * @Route("/trick")
  */
@@ -56,12 +52,12 @@ class TrickController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid() && $user !== null) {
             $comment->setUser($user);
-            $comment->getTrick($trick);
+            $comment->setTrick($trick);
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirectToRoute('trick_show');
+            return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
         }
 
         return $this->render('trick/show.html.twig', [
@@ -82,7 +78,7 @@ class TrickController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('trick_edit', ['id' => $trick->getId()]);
+            return $this->redirectToRoute('trick_show', ['id' => $trick->getId()]);
         }
 
         return $this->render('trick/edit.html.twig', [
@@ -103,5 +99,4 @@ class TrickController extends Controller {
 
         return $this->redirectToRoute('index');
     }
-
 }

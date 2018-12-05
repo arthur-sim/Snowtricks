@@ -84,6 +84,13 @@ label{
 input{
     height:34px;
     border-radius:22px;
-    width:220px;
+    width:290px;
     padding:0 18px; 
+}
+#allcomments h2{
+    margin-left: 3%;
+    
+}
+#allcomments p{
+    margin-left:7%
 }
