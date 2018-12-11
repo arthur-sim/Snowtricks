@@ -41,7 +41,7 @@ class Trick
     private $user;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment",cascade={"persist"}, mappedBy="trick")
      */
     protected $comments;
     

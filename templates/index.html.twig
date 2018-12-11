@@ -21,7 +21,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <div class="nav justify-content-left" id="bannere">
-        <h1>Le snow a portée de main</h1>
+        <h1>Le snowboard a portée de main</h1>
     </div>
 
     <div class="row entries-wrap wide">
@@ -56,8 +56,12 @@
         <button id="add-more" class="btn btn-default" >Voir plus</button>   
     </div>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <br/>
-        <a href="{{ path('trick_new') }}" style='margin-left: 50px;'>Créez un nouveau trick</a>    
+        <div id="newtricks">
+            <div>
+                <h1>Vous ne trouvez pas le tricks que vous cherchez</h1>
+                <p><a href="{{ path('trick_new') }}">Créez le !</a></p> 
+            </div>
+        </div>
     {% endif %}
     <script>
 		var $addMoreList = document.querySelectorAll('#add-more');

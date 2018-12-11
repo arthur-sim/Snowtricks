@@ -74,7 +74,11 @@ class TrickController extends Controller {
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
-
+        /*foreach($form->get('images')->all() as $imageForm){
+            $imageForm->getConfig()->setRequired(false);
+        }*/
+        
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 

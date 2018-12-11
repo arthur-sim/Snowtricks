@@ -43,14 +43,11 @@
             {{ form_row(form.images) }}
             {{ form_row(form.videos) }}
 
-            <a href="#" id="add_image" class="btn btn-default">Ajouter une image</a>
+            <a href="#" id="add_image" class="btn btn-default add-to-collection" data-list="#trick_images">Ajouter une image</a>
 
-            <a href="#" id="add_video" class="btn btn-default add-to-collection">Ajouter une vidéo</a>
-
-            <div id="center" class="text-center">
-                <p><br/>publié le {{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}<br/>
-            </div>
-            {{ include('trick/_form.html.twig', {'button_label': 'Update'}) }}
+            <a href="#" id="add_video" class="btn btn-default add-to-collection" data-list="#trick_videos">Ajouter une vidéo</a>
+            {{ include('trick/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+            
             <br/><br/><br/>
         </div>
     </div>

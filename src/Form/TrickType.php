@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Form\VideoType;
 use App\Form\ImageType;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormEvent;
 
 class TrickType extends AbstractType {
 
@@ -35,6 +37,12 @@ class TrickType extends AbstractType {
                     ],
                 ))
         ;
+        /*$builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event){
+            $form=$event->getForm();
+            foreach($form->get('images')->all() as $imageForm){
+                $imageForm->getConfig()->setRequired(false);
+            }
+        });*/
     }
 
     public function configureOptions(OptionsResolver $resolver) {

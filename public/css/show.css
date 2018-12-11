@@ -11,7 +11,7 @@
     height: 60vh;
 }
 #bannere h1{
-    line-height:60vh; /* centrage vertical */
+    padding-top:27vh; /* centrage vertical */
     color: white;
     font-size: 4em;
 }

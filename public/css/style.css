@@ -28,10 +28,14 @@ body{
     background-repeat: no-repeat;
 }
 #bannere h1{
-    line-height:100vh; /* centrage vertical */
+    padding-top:50vh; /* centrage vertical */
     margin-left: 10vh;
     color: white;
     font-size: 4em;
+}
+
+.hidden{
+    visibility: hidden;
 }
 
 @media only screen and (max-width:400px) {
@@ -314,4 +318,23 @@ body{
     width: 85%;
     height:45px;
   
+}
+#newtricks{
+    width:100%;
+    height:45vh;
+    background-image: url("images/snow2.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align:center;
+}
+#newtricks div{
+    margin-top:5%;
+    padding-top:20vh;
+    color:white;
+    text-align:center;
+}
+#newtricks a{
+    font-size: 1.5em;
+    color: White;
 }
