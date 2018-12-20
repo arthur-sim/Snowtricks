@@ -1,42 +1,39 @@
 <?php
 
-use App\Entity\User;
+use App\Entity\Trick;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  
 class AppFixtures extends Fixture
 {
-    private $passwordEncoder;
- 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $this->passwordEncoder = $passwordEncoder;
-    }
- 
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getUserData() as [ $username, $password, $email, $roles]) {
-            $user = new User();
-            $user->setUsername($username);
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
-            $user->setEmail($email);
-            $user->setRoles($roles);
- 
-            $manager->persist($user);
-            $this->addReference($username, $user);
+        foreach ($this->getTrickData() as [ $title, $content, $user, $comments, $videos, $images]) {
+            $trick = new Trick();
+            $trick->setTitle($title);
+            $trick->setContent($content);
+            $trick->setUser($user);
+            $trick->setComments($comments);
+            $trick->setVideos($videos);
+            $trick->setImages($images);
+            $manager->persist($trick);
         }
  
         $manager->flush();
     }
  
-    private function getUserData(): array
+    private function getTrickData(): array
     {
         return [
-            // $userData = [$username, $password, $email, $roles];
-            ['jane_admin', 'kitten', 'jane_admin@symfony.com', ['ROLE_ADMIN']],
-            ['tom_admin', 'kitten', 'tom_admin@symfony.com', ['ROLE_ADMIN']],
-            ['john_user', 'kitten', 'john_user@symfony.com', ['ROLE_ADMIN']],
+            ['Backside Triple Cork 1440',
+                'Lorem ipsum dolor sit amet, '
+                . 'consectetur adipiscing elit, '
+                . 'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                . 'Ut enim ad minim veniam, '
+                . 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
+                . 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. '
+                . 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            'arthur','https://www.youtube.com/watch?v=u20epr7tSEU','24ff22e64d1d68b9c29e286d1add25cd.jpeg']
         ];
     }
  
