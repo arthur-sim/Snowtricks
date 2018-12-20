@@ -243,7 +243,7 @@ body{
 
     @media only screen and (max-width:1080px) {
       .entries-wrap {
-        max-width: 740px;
+        max-width: 7400px;
       }
 
       .entries .col-block {
@@ -251,8 +251,8 @@ body{
         -moz-box-flex: 0 0 50%;
         -webkit-flex: 0 0 50%;
         -ms-flex: 0 0 50%;
-        flex: 0 0 50%;
-        max-width: 50%;
+        max-width: 43.5%;
+        margin-left:6.5%;
       }
 
     }
@@ -264,7 +264,6 @@ body{
       }
 
     }
-
     @media only screen and (max-width:700px) {
       .entries-wrap {
         max-width: 400px;
@@ -337,4 +336,8 @@ body{
 #newtricks a{
     font-size: 1.5em;
     color: White;
+}
+#pas_de_compte{
+    margin-top:10%;
+
 }
