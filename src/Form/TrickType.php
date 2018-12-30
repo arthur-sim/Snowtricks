@@ -11,13 +11,14 @@ use App\Form\VideoType;
 use App\Form\ImageType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TrickType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('title')
-                ->add('content')
+                ->add('content', TextareaType::class)
                 ->add('images', CollectionType::class, array(
                     'entry_type' => ImageType::class,
                     'allow_add' => true,
