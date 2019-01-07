@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Snowtricks{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
         {% block stylesheet %}{% endblock %}
@@ -15,7 +16,7 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ path('index') }}">Snowtricks <span class="sr-only">(current)</span></a>
                     </li>
-                    <!-- <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Tricks
                       </a>
@@ -25,7 +26,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                       </div>
-                    </li> -->
+                    </li>
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('security_logout') }}">Se déconnecter</a>
