@@ -12,6 +12,6 @@ Pour voir tout les diagrammes du projets:
 
 `Cas d'utilisation : lien`
 
-# Database initialization
+# Database initialisation
 
 Lancez la commande **php bin/console doctrine:fixtures:load** pour avoir des données d'exemples.
