@@ -6,11 +6,11 @@ Qui contient tout pour partager autour du Snowboard , trick , espace de discussi
 # Diagrammes UML
 Pour voir tout les diagrammes du projets:
 
-`Sequence :  lien`
+`Sequence :  https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/Sequence.dia`
 
-`Diagramme de classe :  lien`
+`Diagramme de classe :  https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/Ddc.dia`
 
-`Cas d'utilisation : lien`
+`Cas d'utilisation : https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/CasDutilisation.dia`
 
 # Database initialisation
 
