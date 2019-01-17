@@ -1,24 +1,27 @@
 <?php
+namespace App\DataFixtures;
 
 use App\Entity\Trick;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use App\DataFixtures\UserFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
  
-class TrickFixtures extends Fixture
+class TrickFixtures extends Fixture implements DependentFixtureInterface
 {
+    public static $nbTricks = -1;
     public function load(ObjectManager $manager)
-    {
-        $users= $this->getReference('users');
-        $tricks=[];
+    {     
         foreach ($this->getTrickData() as [ $title, $content]) {
+            $user = $this->getReference('user_'.rand(0, UserFixtures::$nbUsers));
             $trick = (new Trick())
                     ->setTitle($title)
                     ->setContent($content)
-                    ->setUser($users[rand(0,2)]);                   
+                    ->setUser($user);                   
             $manager->persist($trick);
-            $tricks[]=$trick;            
+            self::$nbTricks++;
+            $this->addReference('trick_'.self::$nbTricks, $trick);        
         }
-        $this->addReference('tricks',$tricks);
  
         $manager->flush();
     }

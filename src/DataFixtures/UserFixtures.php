@@ -1,4 +1,5 @@
 <?php
+namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -6,9 +7,9 @@ use Doctrine\Common\Persistence\ObjectManager;
  
 class UserFixtures extends Fixture
 {
+    public static $nbUsers = -1;
     public function load(ObjectManager $manager)
     {
-        $users=[];
         foreach ($this->getUserData() as [ $email, $username, $password, $roles]) {
             $user = (new User())
                     ->setEmail($email)
@@ -16,10 +17,10 @@ class UserFixtures extends Fixture
                     ->setPassword($password)
                     ->setRoles($roles);
             $manager->persist($user);
-            $users[]=$user;
+            self::$nbUsers++;
+            $this->addReference('user_'.self::$nbUsers, $user);
             
         }
-        $this->addReference('users',$users);
  
         $manager->flush();
     }

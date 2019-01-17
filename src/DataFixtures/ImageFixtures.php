@@ -1,20 +1,23 @@
 <?php
+namespace App\DataFixtures;
 
 use App\Entity\Image;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use App\DataFixtures\TrickFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
  
-class ImageFixtures extends Fixture 
+class ImageFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        
         foreach ($this->getImageData() as [ $name ]) {
+            $trick = $this->getReference('trick_'.rand(0, trickFixtures::$nbTricks));
             $image = (new Image())
                     ->setName($name)
-                    ->setTrick($tricks[rand(0,8)]); 
-            $manager->persist($name);
-            
-            $this->addReference('trick', $trick);
+                    ->setTrick($trick); 
+            $manager->persist($image);
         }
  
         $manager->flush();
@@ -23,16 +26,19 @@ class ImageFixtures extends Fixture
     private function getImageData(): array
     {
         return [
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg'],
-            ['0603508e3f060885b2073eca70e2b37b.jpeg']
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg'],
+            ['10a3c6c659fea77cd0fe17cc8dd9754f.jpeg']
+            
         ];
     }
     
