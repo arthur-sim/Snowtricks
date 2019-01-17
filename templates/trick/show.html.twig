@@ -5,7 +5,9 @@
 
     </style>
 {% endblock %}
-{% block title %}Tricks{% endblock %}
+{% block title %}
+    Snowtricks-{{ trick.title }}   
+{% endblock %}
 
 {% block body %}
     <div id="show">
@@ -33,7 +35,7 @@
                     <a href="{{ path('trick_edit', {'id': trick.id}) }}"><img src="../../../public/css/images/edit.png" alt="canard"/></a>
                     <a href="{{ path('trick_delete',{'id': trick.id}) }}"><img src="../../../public/css/images/delete.png" alt="canard"/></a>
                 </div>
-            {% endif %}
+                {% endif %}
             <div id="comments">
                 <h1>Commentaires :</h1><br/>
                 
