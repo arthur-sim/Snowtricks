@@ -33,7 +33,7 @@
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div id="editdelete">
                     <a href="{{ path('trick_edit', {'id': trick.id}) }}"><img src="../../../public/css/images/edit.png" alt="canard"/></a>
-                    <a href="{{ path('trick_delete',{'id': trick.id}) }}"><img src="../../../public/css/images/delete.png" alt="canard"/></a>
+                    <a href="{{ path('trick_delete',{'id': trick.id})~"?_token="~csrf_token("delete"~trick.id) }}"><img src="../../../public/css/images/delete.png" alt="canard"/></a>
                 </div>
                 {% endif %}
             <div id="comments">

@@ -95,7 +95,7 @@ class TrickController extends Controller {
      * @Route("/{id}/delete", name="trick_delete")
      */
     public function delete(Request $request, Trick $trick): Response {
-        if ($this->isCsrfTokenValid('delete' . $trick->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $trick->getId(), $request->query->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($trick);
             $em->flush();

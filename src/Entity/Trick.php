@@ -41,17 +41,17 @@ class Trick
     private $user;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment",cascade={"persist"}, mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment",cascade={"persist","remove"}, mappedBy="trick")
      */
     protected $comments;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Video", cascade={"persist"}, mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", cascade={"persist","remove"}, mappedBy="trick")
      */
     protected $videos;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", cascade={"persist"},  mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", cascade={"persist","remove"},  mappedBy="trick")
      */
     protected $images;
 
