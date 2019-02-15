@@ -25,7 +25,6 @@ class ResettingController extends Controller
      */
     public function request(Request $request, Mailer $mailer, TokenGeneratorInterface $tokenGenerator)
     {
-        // création d'un formulaire "à la volée", afin que l'internaute puisse renseigner son mail
         $form = $this->createFormBuilder()
             ->add('email', EmailType::class, [
                 'constraints' => [
@@ -40,22 +39,17 @@ class ResettingController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            // voir l'épisode 2 de cette série pour retrouver la méthode loadUserByUsername:
             $user = $em->getRepository(User::class)->loadUserByUsername($form->getData()['email']);
 
-            // aucun email associé à ce compte.
             if (!$user) {
                 $request->getSession()->getFlashBag()->add('warning', "Cet email n'existe pas.");
                 return $this->redirectToRoute("request_resetting");
             } 
 
-            // création du token
             $user->setToken($tokenGenerator->generateToken());
-            // enregistrement de la date de création du token
             $user->setPasswordRequestedAt(new \Datetime());
             $em->flush();
 
-            // on utilise le service Mailer créé précédemment
             $bodyMail = $mailer->createBodyMail('resetting/mail.html.twig', [
                 'user' => $user
             ]);
@@ -69,9 +63,7 @@ class ResettingController extends Controller
             'form' => $form->createView()
         ]);
     }
-        
-    // si supérieur à 10min, retourne false
-    // sinon retourne false
+
     private function isRequestInTime(\Datetime $passwordRequestedAt = null)
     {
         if ($passwordRequestedAt === null)
@@ -92,10 +84,6 @@ class ResettingController extends Controller
      */
     public function resetting(User $user, $token, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // interdit l'accès à la page si:
-        // le token associé au membre est null
-        // le token enregistré en base et le token présent dans l'url ne sont pas égaux
-        // le token date de plus de 10 minutes
         if ($user->getToken() === null || $token !== $user->getToken() || !$this->isRequestInTime($user->getPasswordRequestedAt()))
         {
             throw new AccessDeniedHttpException();
@@ -109,7 +97,6 @@ class ResettingController extends Controller
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            // réinitialisation du token à null pour qu'il ne soit plus réutilisable
             $user->setToken(null);
             $user->setPasswordRequestedAt(null);
 
