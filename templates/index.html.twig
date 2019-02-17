@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}index{% endblock %}
+
 
 {% block stylesheet %}
     <style>
@@ -42,10 +42,15 @@
 
                             <div class="item-entry__date">
                                 <p>{{ trick.createAt ? trick.createAt|date('Y-m-d H:i:s') : '' }}</p>
-                            </div>
+                                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                    <div id="editdelete">
+                                        <a href="{{ path('trick_edit', {'id': trick.id}) }}"><img src="../../public/css/images/edit.png" alt="canard" style='width:7%'/></a>
+                                        <a href="{{ path('trick_delete',{'id': trick.id}) }}"><img src="../../public/css/images/delete.png" alt="canard" style='width:7%'/></a>
+                                    </div>
+                                {% endif %} 
+                            </div>                          
                         </div>
                     </div> <!-- item-entry -->
-
                 </article> <!-- end article -->
             {% else %}
                 <p colspan="5" style='margin-left: 50px;'>Pas de tricks trouvé.</p>
@@ -55,49 +60,54 @@
     <div id="buttonloadmore">
         <button id="add-more" class="btn btn-default" >Voir plus</button>   
     </div>
-    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <div id="newtricks">
+    <div id="newtricks">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <div>
                 <h1>Vous ne trouvez pas le tricks que vous cherchez</h1>
                 <p><a href="{{ path('trick_new') }}">Créez le !</a></p> 
             </div>
-        </div>
-    {% endif %}
+        {% else %}
+            <div>
+                <h1>Connectez vous pour pouvoir créer un tricks</h1>
+                <p><a href="{{ path('security_login') }}">Connexion</a></p> 
+            </div>    
+        {% endif %}
+    </div>
     <script>
-		var $addMoreList = document.querySelectorAll('#add-more');
+        var $addMoreList = document.querySelectorAll('#add-more');
 
-		for ($addMore of $addMoreList) {
-			$addMore.addEventListener('click', function () {
-				displayNext5Tricks();
-			});
-		}
+        for ($addMore of $addMoreList) {
+            $addMore.addEventListener('click', function () {
+                displayNext5Tricks();
+            });
+        }
 
-		checkDisplayAddMore();
+        checkDisplayAddMore();
 
-		function displayNext5Tricks() {
-			var $tricksHidden = document.querySelectorAll('.trick-hidden');
+        function displayNext5Tricks() {
+            var $tricksHidden = document.querySelectorAll('.trick-hidden');
 
-			var i = 0;
-			for ($trickHidden of $tricksHidden) {
-				if (i >= 4) {
-					continue;
-				}
+            var i = 0;
+            for ($trickHidden of $tricksHidden) {
+                if (i >= 4) {
+                    continue;
+                }
 
-				$trickHidden.classList.remove('trick-hidden');
+                $trickHidden.classList.remove('trick-hidden');
 
-				i++;
-			}
+                i++;
+            }
 
-			checkDisplayAddMore();
-		}
+            checkDisplayAddMore();
+        }
 
-		function checkDisplayAddMore() {
-			if (document.querySelectorAll('.trick-hidden').length === 0) {
-				for ($addMore of $addMoreList) {
-					$addMore.classList.add('hidden');
-				}
-			}
-		}
+        function checkDisplayAddMore() {
+            if (document.querySelectorAll('.trick-hidden').length === 0) {
+                for ($addMore of $addMoreList) {
+                    $addMore.classList.add('hidden');
+                }
+            }
+        }
     </script>
     <br/><br/><br/><br/><br/>
 

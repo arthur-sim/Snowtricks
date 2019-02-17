@@ -26,9 +26,10 @@ body{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 #bannere h1{
-    padding-top:50vh; /* centrage vertical */
+    padding-top:45vh; /* centrage vertical */
     margin-left: 10vh;
     color: white;
     font-size: 4em;
@@ -323,6 +324,7 @@ body{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     text-align:center;
 }
 #newtricks div{
@@ -336,28 +338,53 @@ body{
     color: White;
 }
 @media only screen and (max-width:1480px) {
-        #bannere h1{
-            padding-top:45vh; /* centrage vertical */
-            margin-left: 5vh;
-            font-size: 1.6em;
-        }
-        #newtricks{
-            width:100%;
-            height:45vh;
-        }
-        #newtricks div{
-            padding-top:18vh;
-            color:white;
-            text-align:center;
-            width:80%;
-            margin:auto;
-        }
-        #newtricks a{
-            font-size: 1.1em;
-            color: White;
-        }
-        #newtricks h1{
-            font-size: 1em;
-        }
-
+    #bannere h1{
+        padding-top:45vh; /* centrage vertical */
+        margin-left: 5vh;
+        font-size: 1.6em;
     }
+    #newtricks{
+        width:100%;
+        height:45vh;
+    }
+    #newtricks div{
+        padding-top:18vh;
+        color:white;
+        text-align:center;
+        width:80%;
+        margin:auto;
+    }
+    #newtricks a{
+        font-size: 1.1em;
+        color: White;
+    }
+    #newtricks h1{
+        font-size: 1em;
+    }
+
+}
+footer{
+   background-color: rgba(255, 255, 255,0.5);
+}
+#bannere_error{
+    width: 100%;
+    height: 100vh;
+    background-image: url("images/fond-snowboard.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+#bannere_error div{
+    padding-top: 40vh;
+    font-size: 2em;
+}
+#bannere_error a{
+    padding:10px;
+    font-size:20px;
+    background:#478bf9;
+    color:#fff;
+    width:90px;
+    border-radius:2px;
+    border:none;
+}

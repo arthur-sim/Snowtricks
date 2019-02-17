@@ -15,7 +15,9 @@ input{
 #bannere input{
     color:white;
 }
-
+#trick_title{
+    width:93%;
+}
 .delete-from-collection{
     border:none;
     margin:8px;

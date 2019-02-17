@@ -9,7 +9,9 @@
     {{ parent() }}
     <script src="{{ asset('js/collection.js') }}"></script>
 {% endblock %}
-{% block title %}Edit Tricks{% endblock %}
+{% block title %}
+    Snowtricks-{{ trick.title }}   
+{% endblock %}
 
 {% block body %}
 
