@@ -106,9 +106,11 @@ class User implements UserInterface, \Serializable
         return $this->email;
     }
  
-    public function setEmail(string $email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+        
+        return $this;
     }
     
     public function getUsername(): ?string
@@ -150,9 +152,11 @@ class User implements UserInterface, \Serializable
         return array_unique($roles);
     }
  
-    public function setRoles(array $roles): void
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+        return $this;
+        
     }
  
     /**
