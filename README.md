@@ -8,12 +8,20 @@ Qui contient tout pour partager autour du Snowboard , trick , espace de discussi
 # Diagrammes UML
 Pour voir tout les diagrammes du projets:
 
-`Sequence :  https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/Sequence.dia`
+`Sequence :`  https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/Sequence.dia
 
-`Diagramme de classe :  https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/Ddc.dia`
+`Diagramme de classe :`  https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/Ddc.dia
 
-`Cas d'utilisation : https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/CasDutilisation.dia`
+`Cas d'utilisation :` https://github.com/arthur-sim/Snowtricks/blob/master/Diagrams/CasDutilisation.dia
+
+# Installation
+Pour installer le site copiez les différents fichiers ( fichier diagrammes peu utiles ) 
+Installez ensuite les vendor en faisant un `composer install`
+Si vous utilisez un service tel que Wamp , Mamp ou Xamp vérifiez bien qu'il soit lancé.
 
 # Database initialisation
-
-Lancez la commande **php bin/console doctrine:fixtures:load** pour avoir des données d'exemples.
+Ouvrez une console a la racine du projet
+Lancez la commande **php bin/console doctrine:fixtures:load** pour avoir les données d'exemples.
+Ces données comportes des utilisateur , des tricks ainsi que leurs images , vidéos et commentaires.
+N'oubliez pas de connecter votre base de données avant de faire les étapes ci dessus
+Ce lien pourras vous aider https://symfony.com/doc/current/doctrine.html
