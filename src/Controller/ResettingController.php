@@ -106,7 +106,7 @@ class ResettingController extends Controller
 
             $request->getSession()->getFlashBag()->add('success', "Votre mot de passe a été renouvelé.");
 
-            return $this->redirectToRoute('connexion');
+            return $this->redirectToRoute('security_login');
 
         }
 

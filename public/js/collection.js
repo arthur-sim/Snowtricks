@@ -9,7 +9,9 @@
             $(this).removeAttr('required');
             
         });
-        
+        $('.collection>div').each(function (){
+            $(this).hide();
+        });
 	$('.add-to-collection').click(function (e) {
 		var list = $($(this).attr('data-list'));
 		// Try to find the counter of the list
