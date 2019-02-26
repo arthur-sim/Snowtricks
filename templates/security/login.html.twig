@@ -27,6 +27,7 @@
                 <input type="password" id="password" name="_password"/>
             </span>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+            <p><a href="{{ path('request_resetting') }}">Mot de passe oublié</a></p> 
             <div class="submit">
                 <button type="submit" value="Submit">Submit</button>
             </div>

@@ -24,7 +24,7 @@
                 {% endfor %}
                 {% for video in trick.videos %}
                     <iframe src="{{ video.urlIFrame }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen><p>null</p></iframe>
-                {% endfor %}
+                    {% endfor %}
             </div>
 
             <p id="content">{{ trick.content }}</p>
@@ -35,18 +35,18 @@
                     <a href="{{ path('trick_edit', {'id': trick.id}) }}"><img src="../../../public/css/images/edit.png" alt="canard"/></a>
                     <a href="{{ path('trick_delete',{'id': trick.id})~"?_token="~csrf_token("delete"~trick.id) }}"><img src="../../../public/css/images/delete.png" alt="canard"/></a>
                 </div>
-                {% endif %}
+            {% endif %}
             <div id="comments">
                 <h1>Commentaires :</h1><br/>
-                
-                    {% for comment in trick.comments %}
-                        <div id="allcomments">
-                            <h2>{{ comment.title }}</h2>
-                            <p>{{ comment.content }}<p><br/>
-                        </div>
-                    {% else %}
-                         <p>Pas de commentaires</p> 
-                    {% endfor %}  
+
+                {% for comment in trick.comments %}
+                    <div id="allcomments">
+                        <h2>{{ comment.title }}</h2>
+                        <p>{{ comment.content }}<p><br/>
+                    </div>
+                {% else %}
+                    <p>Pas de commentaires</p> 
+                {% endfor %}  
             </div>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div id="center" class="text-center">
@@ -72,7 +72,7 @@
                             </div>    
                             {{ form_end(form) }}
                         </div>
-                    </div>
+                    </div>  
                 {% endif %}
                 <br/><br/><br/><br/>
             </div>
